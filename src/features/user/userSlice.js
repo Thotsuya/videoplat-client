@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import jwtDecode from "jwt-decode";
 
 const initialState = {
+    id: null,
     name: "",
     email: "",
     token: null,
@@ -14,6 +15,7 @@ if (localStorage.getItem("token")) {
         localStorage.removeItem("token");
     } else {
         initialState.token = localStorage.getItem("token");
+        initialState.id = decodedToken.id;
         initialState.name = decodedToken.name;
         initialState.email = decodedToken.email;
         initialState.isLogged = true;
@@ -25,6 +27,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         login: (state, { payload }) => {
+            state.id = payload.id;
             state.name = payload.name;
             state.email = payload.email;
             state.token = payload.token;
@@ -32,6 +35,7 @@ export const userSlice = createSlice({
             localStorage.setItem("token", payload.token);
         },
         logout: (state) => {
+            state.id = null;
             state.name = "";
             state.email = "";
             state.token = "";
