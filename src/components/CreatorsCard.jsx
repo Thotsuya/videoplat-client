@@ -1,30 +1,27 @@
 import {Box, Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material";
-import {useEffect} from "react";
-import moment from "moment";
-import {useSelector} from "react-redux";
-import {FaThumbsUp, FaThumbsDown} from "react-icons/fa";
+import {useDispatch, useSelector} from "react-redux";
+import {FaThumbsDown, FaThumbsUp} from "react-icons/fa";
 import client from "../config/axios";
 import useToasts from "../utils/useToasts";
-import {useDispatch} from "react-redux";
-import {fetchVideos} from "../features/videos/videosActions";
+import {fetchCreators} from "../features/creators/creatorsActions";
 
 
-export default function VideoCard({video}) {
+export default function CreatorsCard({creator}) {
 
     const {id} = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const {info : InfoToast} = useToasts();
+    const {info: InfoToast} = useToasts();
 
-    const isLiked = () => {
-        return video.likedBy.find((user) => user.id === id) !== undefined;
+    const isFollowing = () => {
+        return creator.followers.find((user) => user.id === id) !== undefined;
     }
 
-    const likeVideo = async () => {
+    const followCreator = async () => {
         try {
-            const response = await client.post(`/videos/${video.id}/like`);
-            dispatch(fetchVideos());
+            const response = await client.post(`/creators/${creator.id}/follow`);
+            dispatch(fetchCreators());
             InfoToast(response.data.message);
-        }catch (error) {
+        } catch (error) {
             console.log(error);
         }
     }
@@ -34,36 +31,36 @@ export default function VideoCard({video}) {
             <Card sx={{minWidth: 275}} elevation={4}>
                 <CardContent>
                     <Typography variant="h5" component="div">
-                        {video.title}
+                        {creator.name}
                     </Typography>
                     <Typography sx={{mb: 1.5}} color="text.secondary">
-                        By {video.User.name}
+                        {creator.email}
                     </Typography>
                     <Typography variant="body2">
-                        {video.description}
+                        {creator.followers.length} Followers
                     </Typography>
-                    <Typography sx={{mb: 1.5}} color="text.secondary">
-                        Published on {moment(video.createdAt).format('DD MMM YYYY')}
+                    <Typography variant="body2">
+                        {creator.Videos.length} Videos
+                    </Typography>
+                    <Typography variant="body2">
+                        {creator.likedVideos.length} Liked Videos
                     </Typography>
 
-                    <Typography variant="body2">
-                        {video.likedBy.length} Likes
-                    </Typography>
 
                 </CardContent>
                 <CardActions>
                     <Box sx={{display: 'flex', alignItems: 'center'}}>
-                        {isLiked() ? (
+                        {isFollowing() ? (
                             <Button variant="outlined" color={"error"} sx={{
                                 padding: '0.7rem',
-                            }} onClick={likeVideo}>
+                            }} onClick={followCreator}>
                                 <FaThumbsDown/>
                             </Button>
 
                         ) : (
                             <Button variant="outlined" color={"primary"} sx={{
                                 padding: '0.7rem',
-                            }} onClick={likeVideo}>
+                            }} onClick={followCreator}>
                                 <FaThumbsUp/>
                             </Button>
                         )}
