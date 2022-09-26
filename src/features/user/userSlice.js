@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwtDecode from "jwt-decode";
-import { authenticate, register } from "./userActions";
 
 const initialState = {
     name: "",
@@ -39,15 +38,6 @@ export const userSlice = createSlice({
             state.isLogged = false;
             localStorage.removeItem("token");
         }
-    },
-    extraReducers: {
-        [authenticate.fulfilled]: (state, { payload }) => {
-            state.name = payload.name;
-            state.email = payload.email;
-            state.token = payload.token;
-            state.isLogged = true;
-            localStorage.setItem("token", payload.token);
-        },
     }
 });
 
