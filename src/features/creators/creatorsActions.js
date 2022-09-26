@@ -12,3 +12,15 @@ export const fetchCreators = createAsyncThunk(
         }
     }
 )
+
+export const fetchCreator = createAsyncThunk(
+    "creators/fetchCreator",
+    async(id, {rejectWithValue}) => {
+        try {
+            const {data} = await client.get(`/creators/${id}`);
+            return data;
+        } catch (err) {
+            return rejectWithValue(err.response.data);
+        }
+    }
+)

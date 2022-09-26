@@ -9,6 +9,7 @@ import Register from "../Pages/Register";
 
 import CreateVideo from "../Pages/Videos/Create";
 import CreatorsIndex from "../Pages/Creators";
+import CreatorProfile from "../Pages/Creators/profile";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
             {path: "login", element: <AuthRoute component={Login}/>},
             {path: "register", element: <AuthRoute component={Register}/>},
             {path: "videos/create", element: <ProtectedRoute component={CreateVideo}/>},
-            {path: "creators", element: <CreatorsIndex/>},
+            {path: "creators", element: <ProtectedRoute component={CreatorsIndex} />},
+            {path: "profile", element: <ProtectedRoute component={CreatorProfile}/>},
         ]
     },
 ])

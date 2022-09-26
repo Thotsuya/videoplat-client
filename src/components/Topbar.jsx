@@ -20,6 +20,10 @@ const navItems = [
     {
         name: 'Creators',
         path: '/creators'
+    },
+    {
+        name: 'Profile',
+        path: '/profile'
     }
 ]
 

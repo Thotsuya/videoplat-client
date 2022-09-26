@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwtDecode from "jwt-decode";
+import client from "../../config/axios";
 
 const initialState = {
     id: null,

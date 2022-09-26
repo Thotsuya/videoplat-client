@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCreators } from "./creatorsActions";
+import { fetchCreators,fetchCreator } from "./creatorsActions";
 
 export const creatorsSlice = createSlice({
     name: "creators",
     initialState: {
         creators: [],
+        creator: {},
     },
     reducers: {
         setCreators: (state, { payload }) => {
@@ -14,6 +15,9 @@ export const creatorsSlice = createSlice({
     extraReducers:{
         [fetchCreators.fulfilled]: (state, { payload }) => {
             state.creators = payload;
+        },
+        [fetchCreator.fulfilled]: (state, { payload }) => {
+            state.creator = payload;
         }
     }
 });
