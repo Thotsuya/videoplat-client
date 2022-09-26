@@ -1,6 +1,6 @@
 import {Card, CardContent, Grid, Typography, Button} from "@mui/material";
 import moment from "moment";
-
+import {Link} from "react-router-dom";
 
 export default function VideoCardAlt({video, edit = false}) {
 
@@ -18,7 +18,7 @@ export default function VideoCardAlt({video, edit = false}) {
                         Published on {moment(video.createdAt).format('DD MMM YYYY')}
                     </Typography>
                     {edit && (
-                        <Button variant="contained" color="primary">
+                        <Button component={Link} to={`/videos/${video.id}/edit`} variant="contained" color="primary">
                             Edit
                         </Button>
                     )}

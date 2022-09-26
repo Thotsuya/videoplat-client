@@ -30,7 +30,7 @@ export default function CreatorProfile() {
 
                 <Paper elevation={4} sx={{p: 2, mt: 2}}>
                     <Typography variant="body1">
-                        {creator.followers.length} Followers
+                        {creator.followers?.length} Followers
                     </Typography>
                     <Grid container rowSpacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}} mt={3}>
                         {creator.followers && (
@@ -43,7 +43,7 @@ export default function CreatorProfile() {
 
                 <Paper elevation={4} sx={{p: 2, mt: 2}}>
                     <Typography variant="body1">
-                        {creator.Videos.length} Videos
+                        {creator.Videos?.length} Videos
                     </Typography>
                     <Grid container rowSpacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}} mt={3}>
                         {creator.Videos && (
@@ -56,7 +56,7 @@ export default function CreatorProfile() {
 
                 <Paper elevation={4} sx={{p: 2, mt: 2}}>
                     <Typography variant="body1">
-                        {creator.likedVideos.length} Liked Videos
+                        {creator.likedVideos?.length} Liked Videos
                     </Typography>
                     <Grid container rowSpacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}} mt={3}>
                         {creator.likedVideos && (
